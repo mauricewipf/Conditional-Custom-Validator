@@ -1,8 +1,6 @@
-<h1>
-  Welcome to {{ title }}!
-</h1>
+<h1>Conditional Custom Validator</h1>
 
-<form (change)="validate()" (ngSubmit)="onSubmit()" [formGroup]="form">
+<form (change)="validate()" (focusout)="validate()" (ngSubmit)="onSubmit()" [formGroup]="form">
 
   <label>
     Email:
@@ -15,7 +13,7 @@
   </label>
 
   <div formGroupName="address">
-    <h3>Adresse</h3>
+    <p>Adresse</p>
 
     <label>
       Straße:
@@ -33,15 +31,28 @@
     </label>
   </div>
 
+  <p>Rechnungsadresse</p>
+
   <div>
-    <input formControlName="under18" id="under18" type="checkbox">
-    <label for="under18">Unter 18 Jahren</label>
+    <input formControlName="abweichendeRechnungsadresse" id="abweichendeRechnungsadresse" type="checkbox">
+    <label for="abweichendeRechnungsadresse">Abweichende Rechnungsadresse</label>
   </div>
 
   <div>
+
     <label>
-      Erziehungsberechtigter:
-      <input formControlName="erziehungsberechtigter" type="text">
+      Straße:
+      <input formControlName="invoiceStreet" type="text">
+    </label>
+
+    <label>
+      Stadt:
+      <input formControlName="invoiceCity" type="text">
+    </label>
+
+    <label>
+      PLZ:
+      <input formControlName="invoiceZip" type="text">
     </label>
   </div>
 

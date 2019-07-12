@@ -7,24 +7,24 @@ import {AbstractControl, FormBuilder, ValidatorFn, Validators} from '@angular/fo
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'Conditional Custom Validator';
   form = this.fb.group({
     email: ['', [Validators.email, Validators.required]],
     fullName: ['', Validators.required],
     address: this.fb.group({
-      street: [''],
-      city: [''],
-      zip: ['']
+      street: ['', Validators.required],
+      city: ['', Validators.required],
+      zip: ['', Validators.required]
     }),
-    under18: [false],
-    erziehungsberechtigter: ['', conditionalCustomValidator('under18')],
+    abweichendeRechnungsadresse: [false],
+    invoiceStreet: ['', conditionalCustomValidator('abweichendeRechnungsadresse')],
+    invoiceCity: ['', conditionalCustomValidator('abweichendeRechnungsadresse')],
+    invoiceZip: ['', conditionalCustomValidator('abweichendeRechnungsadresse')]
   });
 
   constructor(private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
-    this.form.valueChanges.subscribe(() => console.log(this.form));
   }
 
   onSubmit() {
@@ -32,17 +32,17 @@ export class AppComponent implements OnInit {
   }
 
   validate() {
-    this.form.updateValueAndValidity();
+    this.form.get('invoiceStreet').updateValueAndValidity();
+    this.form.get('invoiceCity').updateValueAndValidity();
+    this.form.get('invoiceZip').updateValueAndValidity();
   }
 }
 
 export function conditionalCustomValidator(conditionalControl: string): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     try {
-      const required = (control.parent && control.parent.controls[conditionalControl] &&
-        control.parent.controls[conditionalControl].value) ? true : false;
-      console.log(required);
-      return required ? Validators.required : null;
+      const required = control.parent.controls[conditionalControl].value ? true : false;
+      return required ? Validators.required(control) : null;
     } catch (e) {
       return null;
     }
