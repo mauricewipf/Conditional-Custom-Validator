@@ -24,19 +24,24 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.form.valueChanges.subscribe(() => console.log());
+    this.form.valueChanges.subscribe(() => console.log(this.form));
   }
 
   onSubmit() {
     console.warn(this.form.value);
   }
 
+  validate() {
+    this.form.updateValueAndValidity();
+  }
 }
 
 export function conditionalCustomValidator(conditionalControl: string): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     try {
-      const required = (control.parent && control.parent.controls[conditionalControl] && control.parent.controls[conditionalControl].value) ? true : false;
+      const required = (control.parent && control.parent.controls[conditionalControl] &&
+        control.parent.controls[conditionalControl].value) ? true : false;
+      console.log(required);
       return required ? Validators.required : null;
     } catch (e) {
       return null;

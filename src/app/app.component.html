@@ -2,7 +2,7 @@
   Welcome to {{ title }}!
 </h1>
 
-<form (ngSubmit)="onSubmit()" [formGroup]="form">
+<form (change)="validate()" (ngSubmit)="onSubmit()" [formGroup]="form">
 
   <label>
     Email:
@@ -38,11 +38,12 @@
     <label for="under18">Unter 18 Jahren</label>
   </div>
 
-  <label>
-    Erziehungsberechtigter:
-    <input formControlName="erziehungsberechtigter" type="text">
-  </label>
-
+  <div>
+    <label>
+      Erziehungsberechtigter:
+      <input formControlName="erziehungsberechtigter" type="text">
+    </label>
+  </div>
 
   <button [disabled]="!form.valid" type="submit">Absenden</button>
 </form>
