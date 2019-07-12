@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
       city: [''],
       zip: ['']
     }),
-    abweichendeRechnungsAdresse: this.fb.group(null),
+    abweichendeRechnungsAdresse: [null],
     invoiceAddress: this.fb.group({
       street: ['', conditionalCustomValidator('abweichendeRechnungsAdresse')],
       city: ['', conditionalCustomValidator('abweichendeRechnungsAdresse')],
