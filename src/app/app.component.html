@@ -1,6 +1,6 @@
 <h1>Conditional Custom Validator</h1>
 
-<form (change)="validate()" (focusout)="validate()" (ngSubmit)="onSubmit()" [formGroup]="form">
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
 
   <label>
     Email:
@@ -34,12 +34,12 @@
   <p>Rechnungsadresse</p>
 
   <div>
-    <input formControlName="abweichendeRechnungsadresse" id="abweichendeRechnungsadresse" type="checkbox">
+    <input (change)="validate()" formControlName="abweichendeRechnungsadresse" id="abweichendeRechnungsadresse"
+           type="checkbox">
     <label for="abweichendeRechnungsadresse">Abweichende Rechnungsadresse</label>
   </div>
 
   <div>
-
     <label>
       Straße:
       <input formControlName="invoiceStreet" type="text">
