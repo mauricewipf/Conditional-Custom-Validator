@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
     console.warn(this.form.value);
   }
 
-  validate() {
+  updateCheckbox() {
     this.form.get('invoiceStreet').updateValueAndValidity();
     this.form.get('invoiceZip').updateValueAndValidity();
     this.form.get('invoiceCity').updateValueAndValidity();
