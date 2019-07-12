@@ -17,8 +17,8 @@ export class AppComponent implements OnInit {
     }),
     abweichendeRechnungsadresse: [false],
     invoiceStreet: ['', conditionalCustomValidator('abweichendeRechnungsadresse')],
+    invoiceZip: ['', conditionalCustomValidator('abweichendeRechnungsadresse')],
     invoiceCity: ['', conditionalCustomValidator('abweichendeRechnungsadresse')],
-    invoiceZip: ['', conditionalCustomValidator('abweichendeRechnungsadresse')]
   });
 
   constructor(private fb: FormBuilder) {
@@ -33,8 +33,8 @@ export class AppComponent implements OnInit {
 
   validate() {
     this.form.get('invoiceStreet').updateValueAndValidity();
-    this.form.get('invoiceCity').updateValueAndValidity();
     this.form.get('invoiceZip').updateValueAndValidity();
+    this.form.get('invoiceCity').updateValueAndValidity();
   }
 }
 
