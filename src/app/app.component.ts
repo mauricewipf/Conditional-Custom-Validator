@@ -16,19 +16,15 @@ export class AppComponent implements OnInit {
       city: [''],
       zip: ['']
     }),
-    abweichendeRechnungsAdresse: [null],
-    invoiceAddress: this.fb.group({
-      street: ['', conditionalCustomValidator('abweichendeRechnungsAdresse')],
-      city: ['', conditionalCustomValidator('abweichendeRechnungsAdresse')],
-      zip: ['', conditionalCustomValidator('abweichendeRechnungsAdresse')]
-    }),
+    under18: [false],
+    erziehungsberechtigter: ['', conditionalCustomValidator('under18')],
   });
 
   constructor(private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
-    this.form.valueChanges.subscribe(() => console.log(this.form));
+    this.form.valueChanges.subscribe(() => console.log());
   }
 
   onSubmit() {
@@ -39,8 +35,11 @@ export class AppComponent implements OnInit {
 
 export function conditionalCustomValidator(conditionalControl: string): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
-    const forbidden = false;
-    console.log(control.parent, conditionalControl);
-    return forbidden ? {forbiddenName: {value: control.value}} : null;
+    try {
+      const required = (control.parent && control.parent.controls[conditionalControl] && control.parent.controls[conditionalControl].value) ? true : false;
+      return required ? Validators.required : null;
+    } catch (e) {
+      return null;
+    }
   };
 }

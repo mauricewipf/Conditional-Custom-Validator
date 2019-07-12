@@ -34,28 +34,15 @@
   </div>
 
   <div>
-    <input formControlName="abweichendeRechnungsAdresse" id="abweichendeRechnungsAdresse" type="checkbox">
-    <label for="abweichendeRechnungsAdresse">Abweichende Rechnungsadresse</label>
+    <input formControlName="under18" id="under18" type="checkbox">
+    <label for="under18">Unter 18 Jahren</label>
   </div>
 
-  <div formGroupName="invoiceAddress">
-    <h3>Rechnungsadresse</h3>
+  <label>
+    Erziehungsberechtigter:
+    <input formControlName="erziehungsberechtigter" type="text">
+  </label>
 
-    <label>
-      Straße:
-      <input formControlName="street" type="text">
-    </label>
-
-    <label>
-      Stadt:
-      <input formControlName="city" type="text">
-    </label>
-
-    <label>
-      PLZ:
-      <input formControlName="zip" type="text">
-    </label>
-  </div>
 
   <button [disabled]="!form.valid" type="submit">Absenden</button>
 </form>
